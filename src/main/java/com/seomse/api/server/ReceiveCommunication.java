@@ -1,16 +1,4 @@
-/** 
- * <pre>
- *  파 일 명 : ReceiveCommunication.java
- *  설    명 : 문자열 받는 통신
- *         
- *  작 성 자 : macle
- *  작 성 일 : 2018.04
- *  버    전 : 1.0
- *  수정이력 :
- *  기타사항 :
- * </pre>
- * @author Copyrights 2018 by ㈜섬세한사람들. All right reserved.
- */
+
 
 
 package  com.seomse.api.server;
@@ -25,7 +13,19 @@ import org.slf4j.LoggerFactory;
 import com.seomse.commons.communication.StringReceive;
 import com.seomse.commons.handler.ExceptionHandler;
 import com.seomse.commons.utils.ExceptionUtil;
-
+/**
+ * <pre>
+ *  파 일 명 : ReceiveCommunication.java
+ *  설    명 : 문자열 받는 통신
+ *
+ *  작 성 자 : macle
+ *  작 성 일 : 2018.04
+ *  버    전 : 1.0
+ *  수정이력 :
+ *  기타사항 :
+ * </pre>
+ * @author Copyrights 2018 by ㈜섬세한사람들. All right reserved.
+ */
 public class ReceiveCommunication extends Thread{
 	
 	private static final Logger logger = LoggerFactory.getLogger(ReceiveCommunication.class);

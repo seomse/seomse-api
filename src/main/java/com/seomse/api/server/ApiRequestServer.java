@@ -1,4 +1,17 @@
-/** 
+
+package com.seomse.api.server;
+
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.seomse.api.ApiRequest;
+import com.seomse.commons.handler.ExceptionHandler;
+import com.seomse.commons.utils.ExceptionUtil;
+/**
  * <pre>
  *  파 일 명 : ApiRequestServer.java
  *  설    명 : api 요청용서버 서버
@@ -13,19 +26,6 @@
  * @author Copyrights 2018 by ㈜섬세한사람들. All right reserved.
  */
 
-package com.seomse.api.server;
-
-import java.net.InetAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.seomse.api.ApiRequest;
-import com.seomse.commons.handler.ExceptionHandler;
-import com.seomse.commons.utils.ExceptionUtil;
-
 public class ApiRequestServer extends Thread{
 	private static final Logger logger = LoggerFactory.getLogger(ApiRequestServer.class);
 
@@ -39,11 +39,12 @@ public class ApiRequestServer extends Thread{
 	
 
 	private ApiRequestConnectHandler connectHandler;
-	
+
+
 	/**
-	 * 생성자
+	 *
 	 * @param port
-	 * @param packageName
+	 * @param connectHandler
 	 */
 	public ApiRequestServer(int port, ApiRequestConnectHandler connectHandler){
 		this.port = port;

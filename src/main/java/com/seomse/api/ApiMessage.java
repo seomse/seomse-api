@@ -1,8 +1,13 @@
-/** 
+
+
+
+package com.seomse.api;
+
+/**
  * <pre>
  *  파 일 명 : ApiCommunication.java
  *  설    명 : API메시지 추상체
- *         
+ *
  *  작 성 자 : macle
  *  작 성 일 : 2018.04
  *  버    전 : 1.0
@@ -11,11 +16,6 @@
  * </pre>
  * @author Copyrights 2018 by ㈜섬세한사람들. All right reserved.
  */
-
-
-
-package com.seomse.api;
-
 
 public abstract class ApiMessage {
 	

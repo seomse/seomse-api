@@ -1,17 +1,4 @@
-/** 
- * <pre>
- *  파 일 명 : ReceiveServer.java
- *  설    명 : 문자열 받는 서버 
- *             문자열이 대용량일경우 빠른속도로 받기위해 사용
- *         
- *  작 성 자 : macle
- *  작 성 일 : 2018.04
- *  버    전 : 1.0
- *  수정이력 :
- *  기타사항 :
- * </pre>
- * @author Copyrights 2018 by ㈜섬세한사람들. All right reserved.
- */
+
 
 
 package com.seomse.api.server;
@@ -25,7 +12,20 @@ import org.slf4j.LoggerFactory;
 
 import com.seomse.commons.handler.ExceptionHandler;
 import com.seomse.commons.utils.ExceptionUtil;
-
+/**
+ * <pre>
+ *  파 일 명 : ReceiveServer.java
+ *  설    명 : 문자열 받는 서버
+ *             문자열이 대용량일경우 빠른속도로 받기위해 사용
+ *
+ *  작 성 자 : macle
+ *  작 성 일 : 2018.04
+ *  버    전 : 1.0
+ *  수정이력 :
+ *  기타사항 :
+ * </pre>
+ * @author Copyrights 2018 by ㈜섬세한사람들. All right reserved.
+ */
 public class ReceiveServer extends Thread{
 	private static final Logger logger = LoggerFactory.getLogger(ReceiveServer.class);
 	
