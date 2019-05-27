@@ -176,13 +176,14 @@ public class ApiCommunication extends Thread{
 			
 		try {
 			Class<?> apiMessageClass = Class.forName(className);
+			//noinspection deprecation
 			ApiMessage apiMessage = (ApiMessage)apiMessageClass.newInstance();
 			apiMessage.setCommunication(this);
 			apiMessage.receive(message);
 		} catch (Exception e1) {
 			sendMessage(ExceptionUtil.getStackTrace(e1));
 			ExceptionUtil.exception(e1, logger, exceptionHandler);
-			return;
+
 		}
 			
 			

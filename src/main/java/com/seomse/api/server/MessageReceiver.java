@@ -15,7 +15,6 @@ package com.seomse.api.server;
  * </pre>
  * @author Copyrights 2018 by ㈜섬세한사람들. All right reserved.
  */
-
 public interface MessageReceiver {
 	
 
