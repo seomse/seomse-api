@@ -31,7 +31,6 @@ public class ApiCommunication extends Thread{
 	
 	
 	private static final Logger logger = LoggerFactory.getLogger(ApiCommunication.class);
-
 	public static final char DEFAULT_PACKAGE = 'D';
 	public static final char CUSTOM_PACKAGE = 'C';
 	
@@ -62,8 +61,8 @@ public class ApiCommunication extends Thread{
 	
 	/**
 	 * 생성자
-	 * @param defaultPackageName
-	 * @param socket
+	 * @param defaultPackageName 기본패키지
+	 * @param socket 소캣
 	 * @throws UnsupportedEncodingException
 	 * @throws IOException
 	 */
@@ -153,8 +152,8 @@ public class ApiCommunication extends Thread{
 		char packageType = message.charAt(0);
 		message = message.substring(1);
 		
-		String className = null;
-		String messageCode = null;
+		String className ;
+		String messageCode ;
 		
 		if(packageType == DEFAULT_PACKAGE){
 			
