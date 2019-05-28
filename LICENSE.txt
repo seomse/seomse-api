@@ -1,6 +1,6 @@
 GNU General Public License (GPL)
 
-Seomse-commons and previous versions are distributed under GPL to allow all who wish to use, inspect, modify, and distribute it
+Seomse-api and previous versions are distributed under GPL to allow all who wish to use, inspect, modify, and distribute it
 freely, but without any warranty.
 
 Today the GNU GPL is the most widely used free software license. According to eWeek, Eben Moglen, General Counsel for the FSF
@@ -11,7 +11,7 @@ We welcome all initiatives to publish more software under the GPL license, just 
 
 Dual Licensing Available
 
-Seomse-commons follows the dual licensing model used by MySQL, Sleepycat, and other companies. 
+Seomse-api follows the dual licensing model used by MySQL, Sleepycat, and other companies. 
 The dual licensing model is based on the principle of fair exchange or Quid pro Quo ("something for something").
 
 The dual licensing model offers you a choice of either a GPL license or a commercial license. 
