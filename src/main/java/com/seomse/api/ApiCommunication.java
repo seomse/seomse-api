@@ -189,7 +189,7 @@ public class ApiCommunication extends Thread{
 	/**
 	 * 메시지전달
 	 * null 이나 빈값이 들어오면 전달하지 않는다.
-	 * @param message 메시지를 전달한 
+	 * @param message sendMessage
 	 */
 	public boolean sendMessage(String message){
 		if(!sendToReceive.isConnect()){
