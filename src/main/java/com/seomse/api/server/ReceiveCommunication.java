@@ -3,16 +3,14 @@
 
 package  com.seomse.api.server;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.Socket;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.seomse.commons.communication.StringReceive;
 import com.seomse.commons.handler.ExceptionHandler;
 import com.seomse.commons.utils.ExceptionUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.net.Socket;
 /**
  * <pre>
  *  파 일 명 : ReceiveCommunication.java
@@ -35,19 +33,11 @@ public class ReceiveCommunication extends Thread{
 	private ExceptionHandler exceptionHandler;
 	
 	
-	/**
-	 * 생성자
-	 * @throws IOException 
-	 * @throws UnsupportedEncodingException 
-	 */
-	ReceiveCommunication(Socket socket, int bufSize) throws UnsupportedEncodingException, IOException{
+	ReceiveCommunication(Socket socket, int bufSize) throws  IOException{
 		stringReceive = new StringReceive(socket, bufSize);
 	}
 	
-	/**
-	 * 예외 핸들러설정
-	 * @param exceptionHandler
-	 */
+
 	public void setExceptionHandler(ExceptionHandler exceptionHandler) {
 		this.exceptionHandler = exceptionHandler;
 	}
@@ -74,14 +64,14 @@ public class ReceiveCommunication extends Thread{
 					if(index ==-1){
 						continue;
 					}
-					messageReceiver = (MessageReceiver)Class.forName(classSearch.substring(0, index)).newInstance();		
+					//noinspection deprecation
+					messageReceiver = (MessageReceiver)Class.forName(classSearch.substring(0, index)).newInstance();
 					
 					if(index != classSearch.length()-1){
 						messageReceiver.receive(classSearch.substring(index+1));
 					}					
 					sb.setLength(0);
-					sb = null;
-				
+
 				}else{
 					messageReceiver.receive(message);	
 				}

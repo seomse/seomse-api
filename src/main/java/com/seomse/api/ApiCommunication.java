@@ -2,17 +2,15 @@
 
 package com.seomse.api;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.Socket;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.seomse.commons.communication.SendToReceive;
 import com.seomse.commons.handler.EndHandler;
 import com.seomse.commons.handler.ExceptionHandler;
 import com.seomse.commons.utils.ExceptionUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.net.Socket;
 /**
  * <pre>
  *  파 일 명 : ApiCommunication.java
@@ -63,10 +61,8 @@ public class ApiCommunication extends Thread{
 	 * 생성자
 	 * @param defaultPackageName 기본패키지
 	 * @param socket 소캣
-	 * @throws UnsupportedEncodingException
-	 * @throws IOException
 	 */
-	public ApiCommunication(String defaultPackageName, Socket socket) throws UnsupportedEncodingException, IOException {
+	public ApiCommunication(String defaultPackageName, Socket socket) throws  IOException {
 		sendToReceive = new SendToReceive(socket);
 		createTime = System.currentTimeMillis();
 		
@@ -76,7 +72,7 @@ public class ApiCommunication extends Thread{
 	
 	/**
 	 * 로그 최대문자 길이 설정
-	 * @param maxLogLength
+	 * @param maxLogLength maxLogLength
 	 */
 	public void setMaxLogLength(int maxLogLength) {
 		this.maxLogLength = maxLogLength;
@@ -86,7 +82,7 @@ public class ApiCommunication extends Thread{
 
 	/**
 	 * 생성 time 얻기
-	 * @return
+	 * @return CreateTime
 	 */
 	public long getCreateTime() {
 		return createTime;
@@ -95,7 +91,7 @@ public class ApiCommunication extends Thread{
 	
 	/**
 	 * 종료 핸들러
-	 * @param endHandler
+	 * @param endHandler endHandler
 	 */
 	public void setEndHandler(EndHandler endHandler) {
 		this.endHandler = endHandler;
@@ -103,7 +99,7 @@ public class ApiCommunication extends Thread{
 
 	/**
 	 * 예외 핸들러설정
-	 * @param exceptionHandler
+	 * @param exceptionHandler exceptionHandler
 	 */
 	public void setExceptionHandler(ExceptionHandler exceptionHandler) {
 		this.exceptionHandler = exceptionHandler;
@@ -192,9 +188,8 @@ public class ApiCommunication extends Thread{
 	
 	/**
 	 * 메시지전달
-	 * null이나 빈값이 들어오면 전달하지 않는다.
+	 * null 이나 빈값이 들어오면 전달하지 않는다.
 	 * @param message 메시지를 전달한 
-	 * @throws IOException 
 	 */
 	public boolean sendMessage(String message){
 		if(!sendToReceive.isConnect()){
@@ -202,17 +197,28 @@ public class ApiCommunication extends Thread{
 			return false;
 		}
 		if(isLog) {
-			if(message.length() > maxLogLength){
-				logger.debug("sendMessage: " + message.substring(0 , maxLogLength) + ".. +" + message.length() + "characters.");
-			} else {
-				logger.debug("sendMessage: " + message);
-				
-			}
+			logger.debug(getSendMessageLog(message, maxLogLength));
 		}
 		return sendToReceive.send(message);
 	}
-	
-	
+
+	/**
+	 * send message log 얻기
+	 * @param message sendMessage
+	 * @param maxLogLength maxLogLength
+	 * @return SendMessageLog
+	 */
+	public static String getSendMessageLog(String message, int maxLogLength){
+		String log ;
+		if(message.length() > maxLogLength){
+			log = "sendMessage: " + message.substring(0 , maxLogLength) + ".. +" + message.length() + "characters.";
+		}else{
+			log = message;
+		}
+
+		return log;
+	}
+
 	
 	
 	/**

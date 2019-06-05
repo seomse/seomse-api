@@ -41,11 +41,7 @@ public class ApiRequestServer extends Thread{
 	private ApiRequestConnectHandler connectHandler;
 
 
-	/**
-	 *
-	 * @param port
-	 * @param connectHandler
-	 */
+
 	public ApiRequestServer(int port, ApiRequestConnectHandler connectHandler){
 		this.port = port;
 		this.connectHandler = connectHandler;
@@ -55,16 +51,13 @@ public class ApiRequestServer extends Thread{
 	private InetAddress inetAddress = null;
 	
 	
-	/**
-	 * inetAddress 설정
-	 * @param inetAddress
-	 */
 	public void setInetAddress(InetAddress inetAddress) {
 		this.inetAddress = inetAddress;
 	}
 
 	@Override
 	public void run(){
+		//noinspection TryWithIdenticalCatches
 		try{
 			logger.debug("request server start");
 				
@@ -104,7 +97,8 @@ public class ApiRequestServer extends Thread{
 	 */
 	public void stopServer(){
 		isRun= false;
-		try{ 
+		//noinspection CatchMayIgnoreException
+		try{
 			serverSocket.close();
 			serverSocket = null;
 			

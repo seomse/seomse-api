@@ -23,15 +23,15 @@ public abstract class ApiMessage {
 	
 	/**
 	 * ApiCommunication 설정
-	 * @param apiCommunication
+	 * @param apiCommunication ApiCommunication
 	 */
 	public void setCommunication(ApiCommunication apiCommunication){
 		this.communication = apiCommunication;
 	}
 		
 	/**
-	 * 미시지전달
-	 * @param message
+	 * 메시지 전달
+	 * @param message sendMessage
 	 */
 	public void sendMessage(String message) {
 		communication.sendMessage(message);
@@ -39,7 +39,7 @@ public abstract class ApiMessage {
 	
 	/**
 	 * 메시지 받기
-	 * @param message
+	 * @param message receiveMessage
 	 */
 	public abstract void receive(String message);
 	

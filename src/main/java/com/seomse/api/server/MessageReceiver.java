@@ -20,7 +20,7 @@ public interface MessageReceiver {
 
 	/**
 	 * 메시지 받기
-	 * @param message
+	 * @param message receive message
 	 */
 	void receive(String message);
 	

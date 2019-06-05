@@ -44,10 +44,11 @@ public class ApiServer extends Thread {
 	
 	private List<ApiCommunication> apiCommunicationList = new LinkedList<>();
 	
-	private Object lock = new Object();
+	private final Object lock = new Object();
 	
+	@SuppressWarnings("Convert2Lambda")
 	private EndHandler endHandler = new EndHandler() {
-		
+
 		@Override
 		public void end(Object obj) {
 			ApiCommunication apiCommunication = (ApiCommunication) obj;
@@ -59,8 +60,8 @@ public class ApiServer extends Thread {
 	
 	/**
 	 * 생성자
-	 * @param port
-	 * @param packageName
+	 * @param port port
+	 * @param packageName default packageName
 	 */
 	public ApiServer(int port, String packageName){
 		this.port = port;
@@ -71,16 +72,14 @@ public class ApiServer extends Thread {
 	private InetAddress inetAddress = null;
 	
 	
-	/**
-	 * inetAddress 설정
-	 * @param inetAddress
-	 */
+
 	public void setInetAddress(InetAddress inetAddress) {
 		this.inetAddress = inetAddress;
 	}
 
 	@Override
 	public void run(){
+		//noinspection TryWithIdenticalCatches
 		try{
 			logger.debug("api server start");
 				
@@ -123,7 +122,7 @@ public class ApiServer extends Thread {
 	
 	/**
 	 * 연결개수 얻기
-	 * @return
+	 * @return apiCommunicationList size
 	 */
 	public int size() {
 		return apiCommunicationList.size();
@@ -135,7 +134,8 @@ public class ApiServer extends Thread {
 	public void stopServer(){
 		isRun= false;
 		packageName= null;
-		try{ 
+		//noinspection CatchMayIgnoreException
+		try{
 			serverSocket.close();
 			serverSocket = null;
 			

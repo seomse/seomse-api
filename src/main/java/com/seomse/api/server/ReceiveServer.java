@@ -50,7 +50,7 @@ public class ReceiveServer extends Thread{
 
 	/**
 	 * 예외 핸들러설정
-	 * @param exceptionHandler
+	 * @param  exceptionHandler exceptionHandler
 	 */
 	public void setExceptionHandler(ExceptionHandler exceptionHandler) {
 		this.exceptionHandler = exceptionHandler;
@@ -58,7 +58,7 @@ public class ReceiveServer extends Thread{
 	
 	/**
 	 * bufferSize 얻기
-	 * @return
+	 * @return bufferSize
 	 */
 	public int getBufferSize() {
 		return bufferSize;
@@ -75,7 +75,7 @@ public class ReceiveServer extends Thread{
 
 	/**
 	 * inetAddress 설정
-	 * @param inetAddress
+	 * @param inetAddress inetAddress
 	 */
 	public void setInetAddress(InetAddress inetAddress) {
 		this.inetAddress = inetAddress;
@@ -122,6 +122,7 @@ public class ReceiveServer extends Thread{
 	 */
 	public void stopService(){
 		isService = false;
+		//noinspection CatchMayIgnoreException
 		try{
 			if(serverSocket != null){
 				serverSocket.close();
@@ -133,7 +134,7 @@ public class ReceiveServer extends Thread{
 	
 	/**
 	 * 종료여부얻기
-	 * @return
+	 * @return isEnd
 	 */
 	public boolean isEnd() {
 		return isEnd;

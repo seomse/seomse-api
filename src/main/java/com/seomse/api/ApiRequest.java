@@ -77,7 +77,7 @@ public class ApiRequest {
 
 	/**
 	 * 연결 오류 여부 설정
-	 * false일경우 연결오류를 표시하지 않음
+	 * false 이면 연결오류를 표시하지 않음
 	 * ping 테스트에 에러를 표시하고 싶지 않을 경우 사용
 	 * @param isConnectErrorLog
 	 */
@@ -100,7 +100,7 @@ public class ApiRequest {
 	
 	/**
 	 * 로그 최대문자 길이 설정
-	 * @param maxLogLength
+	 * @param maxLogLength MaxLogLength
 	 */
 	public void setMaxLogLength(int maxLogLength) {
 		this.maxLogLength = maxLogLength;
@@ -108,7 +108,7 @@ public class ApiRequest {
 	
 	/**
 	 * 패키지명 설정
-	 * @param packageName
+	 * @param packageName PackageName
 	 */
 	public void setPackageName(String packageName) {
 		this.packageName = packageName;
@@ -116,7 +116,7 @@ public class ApiRequest {
 
 	/**
 	 * 대기시간을 설정한다.
-	 * @param time
+	 * @param time WaitingTime
 	 */
 	public void setWaitingTime(Long time){
 		waitingTime = time;
@@ -124,7 +124,7 @@ public class ApiRequest {
 	
 	/**
 	 * 연결
-	 * @return
+	 * @return 연결 성공 여부
 	 */
 	public boolean connect(){
 		sendToReceive.setConnectTimeOut(connectTimeOut);
@@ -132,15 +132,16 @@ public class ApiRequest {
 	}
 	
 	private boolean isSendMessage = false;
-	private boolean isWatingTimeOver =false;
+	private boolean isWaitingTimeOver =false;
 	/**
 	 * 메시지를 요청하고 전달받은 메시지를 돌려준다
 	 * 전달받아야할 메시지가 있을때사용
-	 * @param sendMessage
-	 * @return
+	 * @param code code
+	 * @param sendMessage sendMessage
+	 * @return ReceiveMessage
 	 */
-	public String sendToReceiveMessage(String code, String sendMessage){		
-		isWatingTimeOver = false;
+	public String sendToReceiveMessage(String code, String sendMessage){
+		isWaitingTimeOver = false;
 		isSendMessage= false;
 		
 		if(!sendToReceive.isConnect()){
@@ -150,13 +151,9 @@ public class ApiRequest {
 		if(sendMessage == null) {
 			sendMessage = "";
 		}
-		
-		if(sendMessage != null&& isLog){
-			if(sendMessage.length() > maxLogLength){
-				logger.debug("sendMessage: " + sendMessage.substring(0 , maxLogLength) + ".. +" + sendMessage.length() + "characters.");
-			} else {
-				logger.debug("sendMessage: " + sendMessage);
-			}
+
+		if(isLog) {
+			logger.debug(ApiCommunication.getSendMessageLog(sendMessage, maxLogLength));
 		}
 		
 		if(packageName == null){
@@ -167,6 +164,7 @@ public class ApiRequest {
 		}
 
 		if(waitingTime != null){
+			//noinspection AnonymousHasLambdaAlternative
 			new Thread(){
 				@Override
 				public void run(){
@@ -176,8 +174,8 @@ public class ApiRequest {
 						return;
 					}
 					if(!isSendMessage){
-						isWatingTimeOver = true;
-						logger.error("watingTimeOut disconnect");
+						isWaitingTimeOver = true;
+						logger.error("waitingTimeOut disconnect");
 						disConnect();
 					}
 				}
@@ -197,7 +195,7 @@ public class ApiRequest {
 				
 		}
 		isSendMessage = true;
-		if(isWatingTimeOver){
+		if(isWaitingTimeOver){
 			receiveMessage = TIME_OVER;
 		}
 		
@@ -209,7 +207,8 @@ public class ApiRequest {
 	/**
 	 * 메시지를 전달한다
 	 * 전달받아야할 메시지가 없을때에만 사용해야 한다.
-	 * @param sendMessage
+	 * @param code code
+	 * @param sendMessage sendMessage
 	 */
 	public void sendMessage(String code, String sendMessage){
 		if(packageName == null){
@@ -232,7 +231,7 @@ public class ApiRequest {
 	
 	/**
 	 * socket 얻기
-	 * @return
+	 * @return Socket
 	 */
 	public Socket getSocket() {
 		return sendToReceive.getSocket();

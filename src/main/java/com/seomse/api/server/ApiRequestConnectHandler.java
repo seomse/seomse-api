@@ -21,7 +21,7 @@ import com.seomse.api.ApiRequest;
 public interface ApiRequestConnectHandler {
 	/**
 	 * 연결
-	 * @param apiRequest
+	 * @param apiRequest apiRequest
 	 */
 	void connect(ApiRequest apiRequest);
 }
