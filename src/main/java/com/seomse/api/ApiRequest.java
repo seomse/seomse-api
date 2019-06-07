@@ -2,14 +2,12 @@
 
 package com.seomse.api;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.Socket;
-
+import com.seomse.commons.communication.SendToReceive;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.seomse.commons.communication.SendToReceive;
+import java.io.IOException;
+import java.net.Socket;
 /**
  * <pre>
  *  파 일 명 : ApiRequest.java
@@ -65,11 +63,9 @@ public class ApiRequest {
 	
 	/**
 	 * 생성자
-	 * @param socket
-	 * @throws UnsupportedEncodingException
-	 * @throws IOException
+	 * @param socket socket
 	 */
-	public ApiRequest(Socket socket) throws UnsupportedEncodingException, IOException{
+	public ApiRequest(Socket socket) throws  IOException{
 		sendToReceive = new SendToReceive(socket);
 	}
 	
@@ -79,7 +75,7 @@ public class ApiRequest {
 	 * 연결 오류 여부 설정
 	 * false 이면 연결오류를 표시하지 않음
 	 * ping 테스트에 에러를 표시하고 싶지 않을 경우 사용
-	 * @param isConnectErrorLog
+	 * @param isConnectErrorLog isConnectErrorLog
 	 */
 	public void setConnectErrorLog(boolean isConnectErrorLog) {
 		sendToReceive.setConnectErrorLog(isConnectErrorLog);
