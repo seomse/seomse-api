@@ -141,4 +141,8 @@ public class ApiServer extends Thread {
 			
 		}catch(Exception e){}
 	}
+
+	public static void main(String[] args) {
+		new ApiServer(Integer.parseInt(args[0]), args[1]).start();
+	}
 }
