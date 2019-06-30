@@ -111,6 +111,14 @@ public class ApiRequest {
 	}
 
 	/**
+	 * 접속 대기시간 설정
+	 * @param connectTimeOut connectTimeOut
+	 */
+	public void setConnectTimeOut(Integer connectTimeOut) {
+		this.connectTimeOut = connectTimeOut;
+	}
+
+	/**
 	 * 대기시간을 설정한다.
 	 * @param time WaitingTime
 	 */
