@@ -168,7 +168,6 @@ public class ApiRequest {
 		}
 
 		if(waitingTime != null){
-			//noinspection AnonymousHasLambdaAlternative
 			new Thread(){
 				@Override
 				public void run(){
