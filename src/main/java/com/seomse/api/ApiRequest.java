@@ -229,8 +229,14 @@ public class ApiRequest {
 	public void disConnect(){
 		sendToReceive.disConnect();
 	}
-	
-	
+
+	/**
+	 * 연결여부
+	 * @return
+	 */
+	public boolean isConnect(){
+		return sendToReceive.isConnect();
+	}
 	
 	/**
 	 * socket 얻기
