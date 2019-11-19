@@ -192,6 +192,10 @@ public class ApiCommunication extends Thread{
 	 * @param message sendMessage
 	 */
 	public boolean sendMessage(String message){
+		if(message == null){
+			return false;
+		}
+
 		if(!sendToReceive.isConnect()){
 			logger.error("message send Fail(Not Connected) : " + message);
 			return false;
