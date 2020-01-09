@@ -2,8 +2,8 @@
 
 package com.seomse.api;
 
+import com.seomse.commons.callback.ObjCallback;
 import com.seomse.commons.communication.SendToReceive;
-import com.seomse.commons.handler.EndHandler;
 import com.seomse.commons.handler.ExceptionHandler;
 import com.seomse.commons.utils.ExceptionUtil;
 import org.slf4j.Logger;
@@ -43,7 +43,7 @@ public class ApiCommunication extends Thread{
 	
 	private long createTime;
 	
-	private EndHandler endHandler = null;
+	private ObjCallback endCallback = null;
 	
 	private ExceptionHandler exceptionHandler = null;
 
@@ -91,15 +91,15 @@ public class ApiCommunication extends Thread{
 	
 	/**
 	 * 종료 핸들러
-	 * @param endHandler endHandler
+	 * @param endCallback ObjCallback
 	 */
-	public void setEndHandler(EndHandler endHandler) {
-		this.endHandler = endHandler;
+	public void setEndCallback(ObjCallback endCallback) {
+		this.endCallback = endCallback;
 	}
 
 	/**
 	 * 예외 핸들러설정
-	 * @param exceptionHandler exceptionHandler
+	 * @param exceptionHandler ExceptionHandler
 	 */
 	public void setExceptionHandler(ExceptionHandler exceptionHandler) {
 		this.exceptionHandler = exceptionHandler;
@@ -125,8 +125,8 @@ public class ApiCommunication extends Thread{
 			ExceptionUtil.exception(e, logger, exceptionHandler);
 		}
 		try{
-			if(endHandler != null){
-				endHandler.end(this);
+			if(endCallback != null){
+				endCallback.callback(this);
 			}
 		}catch(Exception e){
 			ExceptionUtil.exception(e, logger, exceptionHandler);

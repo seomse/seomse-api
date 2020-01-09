@@ -1,19 +1,18 @@
 
 package com.seomse.api.server;
 
+import com.seomse.api.ApiCommunication;
+import com.seomse.commons.callback.ObjCallback;
+import com.seomse.commons.handler.ExceptionHandler;
+import com.seomse.commons.utils.ExceptionUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.seomse.api.ApiCommunication;
-import com.seomse.commons.handler.EndHandler;
-import com.seomse.commons.handler.ExceptionHandler;
-import com.seomse.commons.utils.ExceptionUtil;
 
 /**
  * <pre>
@@ -45,12 +44,11 @@ public class ApiServer extends Thread {
 	private List<ApiCommunication> apiCommunicationList = new LinkedList<>();
 	
 	private final Object lock = new Object();
-	
-	@SuppressWarnings("Convert2Lambda")
-	private EndHandler endHandler = new EndHandler() {
+
+	private ObjCallback endCallback = new ObjCallback() {
 
 		@Override
-		public void end(Object obj) {
+		public void callback(Object obj) {
 			ApiCommunication apiCommunication = (ApiCommunication) obj;
 			synchronized (lock) {
 				apiCommunicationList.remove(apiCommunication);
@@ -101,7 +99,7 @@ public class ApiServer extends Thread {
 			while(isRun){								
 				Socket communication_socket = serverSocket.accept();	
 				ApiCommunication apiCommunication = new ApiCommunication(packageName, communication_socket);
-				apiCommunication.setEndHandler(endHandler);
+				apiCommunication.setEndCallback(endCallback);
 				synchronized (lock) {
 					apiCommunicationList.add(apiCommunication);	
 				}
