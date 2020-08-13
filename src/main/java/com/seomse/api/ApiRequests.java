@@ -1,26 +1,35 @@
+/*
+ * Copyright (C) 2020 Seomse Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.seomse.api;
 /**
- * <pre>
- *  파 일 명 : ApiRequests.java
- *  설    명 : API 요청
- *              ApiRequest를 활용한 1회성 메소드
- *  작 성 자 : macle
- *  작 성 일 : 2019.09.19
- *  버    전 : 1.0
- *  수정이력 :
- *  기타사항 :
- * </pre>
- * @author Copyrights 2019 by ㈜섬세한사람들. All right reserved.
+ * api 요청 전역 메소드 모음
+ *
+ * @author macle
  */
 public class ApiRequests {
 
     /**
      * 1회성 메시지 클래스
-     * @param hostAddress
-     * @param port
-     * @param packageName
-     * @param code
-     * @return
+     * @param hostAddress string address
+     * @param port int port
+     * @param packageName string package name
+     * @param code string code = run class name
+     * @param message string request message
+     * @return string response message
      */
     public static String sendToReceiveMessage(String hostAddress, int port, String packageName, String code, String message){
 

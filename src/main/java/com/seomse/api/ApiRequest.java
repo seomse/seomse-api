@@ -1,24 +1,31 @@
-
+/*
+ * Copyright (C) 2020 Seomse Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 package com.seomse.api;
 
-import com.seomse.commons.communication.SendToReceive;
+import com.seomse.api.communication.SendToReceive;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.Socket;
 /**
- * <pre>
- *  파 일 명 : ApiRequest.java
- *  설    명 : API 요청
- *  작 성 자 : macle
- *  작 성 일 : 2018.04
- *  버    전 : 1.0
- *  수정이력 :
- *  기타사항 :
- * </pre>
- * @author Copyrights 2018 by ㈜섬세한사람들. All right reserved.
+ * api 요청 클라이언트
+ *
+ * @author macle
  */
 public class ApiRequest {
 	
@@ -28,7 +35,7 @@ public class ApiRequest {
 	
 	public static final String TIME_OVER = "TIME_OVER";
 	
-	private SendToReceive sendToReceive;
+	private final SendToReceive sendToReceive;
 	
 	private String host;
 	private int port;
@@ -168,21 +175,18 @@ public class ApiRequest {
 		}
 
 		if(waitingTime != null){
-			new Thread(){
-				@Override
-				public void run(){
-					try{
-						Thread.sleep(waitingTime);
-					}catch(Exception e){
-						return;
-					}
-					if(!isSendMessage){
-						isWaitingTimeOver = true;
-						logger.error("waitingTimeOut disconnect");
-						disConnect();
-					}
+			new Thread(() -> {
+				try{
+					Thread.sleep(waitingTime);
+				}catch(Exception e){
+					return;
 				}
-			}.start();
+				if(!isSendMessage){
+					isWaitingTimeOver = true;
+					logger.error("waitingTimeOut disconnect");
+					disConnect();
+				}
+			}).start();
 		}
 		
 		
@@ -232,7 +236,7 @@ public class ApiRequest {
 
 	/**
 	 * 연결여부
-	 * @return
+	 * @return boolean isConnect
 	 */
 	public boolean isConnect(){
 		return sendToReceive.isConnect();

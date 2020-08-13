@@ -1,13 +1,6 @@
-/** 
- * <pre>
- *  설    명 : seomse api
- *                    
- *  작 성 자 : macle
- *  작 성 일 : 20180.04
- *  버    전 : 1.0
- *  수정이력 :
- *  기타사항 :
- * </pre>
- * @author Copyrights 2018 by ㈜섬세한사람들. All right reserved.
+/**
+ * 이패키지는 다양한 내부 통신용 api를 제공 합니다.
+ * 보안 적인 부분을 제외 하고 작업 되었기 떄문에 반드시 내부망 에서만 사용 해야 합니다.
+ * @author macle
  */
 package com.seomse.api;

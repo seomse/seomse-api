@@ -1,9 +1,21 @@
-
-
-
+/*
+ * Copyright (C) 2020 Seomse Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package  com.seomse.api.server;
 
-import com.seomse.commons.communication.StringReceive;
+import com.seomse.api.communication.StringReceive;
 import com.seomse.commons.handler.ExceptionHandler;
 import com.seomse.commons.utils.ExceptionUtil;
 import org.slf4j.Logger;
@@ -11,24 +23,20 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.Socket;
+
 /**
- * <pre>
- *  파 일 명 : ReceiveCommunication.java
- *  설    명 : 문자열 받는 통신
+ * 메시지 전달 받는 통신
+ * 메시지를 정해진 크기 만큼 받고
+ * 메시지 종료 여부를 전달 받을 떄 활용
  *
- *  작 성 자 : macle
- *  작 성 일 : 2018.04
- *  버    전 : 1.0
- *  수정이력 :
- *  기타사항 :
- * </pre>
- * @author Copyrights 2018 by ㈜섬세한사람들. All right reserved.
+ * 대량 메시지를 전달 받기 위해 개발됨
+ * @author macle
  */
 public class ReceiveCommunication extends Thread{
 	
 	private static final Logger logger = LoggerFactory.getLogger(ReceiveCommunication.class);
 	
-	private StringReceive stringReceive;
+	private final StringReceive stringReceive;
 	
 	private ExceptionHandler exceptionHandler;
 	
@@ -64,7 +72,6 @@ public class ReceiveCommunication extends Thread{
 					if(index ==-1){
 						continue;
 					}
-					//noinspection deprecation
 					messageReceiver = (MessageReceiver)Class.forName(classSearch.substring(0, index)).newInstance();
 					
 					if(index != classSearch.length()-1){

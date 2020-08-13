@@ -1,6 +1,18 @@
-
-
-
+/*
+ * Copyright (C) 2020 Seomse Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.seomse.api.server;
 
 import java.net.InetAddress;
@@ -13,18 +25,12 @@ import org.slf4j.LoggerFactory;
 import com.seomse.commons.handler.ExceptionHandler;
 import com.seomse.commons.utils.ExceptionUtil;
 /**
- * <pre>
- *  파 일 명 : ReceiveServer.java
- *  설    명 : 문자열 받는 서버
- *             문자열이 대용량일경우 빠른속도로 받기위해 사용
+ * 메시지 전달 통신 서버.
+ * 메시지를 정해진 크기 만큼 받고
+ * 메시지 종료 여부를 전달 받을 떄 활용
  *
- *  작 성 자 : macle
- *  작 성 일 : 2018.04
- *  버    전 : 1.0
- *  수정이력 :
- *  기타사항 :
- * </pre>
- * @author Copyrights 2018 by ㈜섬세한사람들. All right reserved.
+ * 대량 메시지를 전달 받기 위해 개발됨
+ * @author macle
  */
 public class ReceiveServer extends Thread{
 	private static final Logger logger = LoggerFactory.getLogger(ReceiveServer.class);
@@ -34,7 +40,7 @@ public class ReceiveServer extends Thread{
 	
 	private boolean isEnd = false;
 	
-	private int port;
+	private final int port;
 	private InetAddress inetAddress = null;
 	
 	private int bufferSize = 10240;
@@ -67,7 +73,7 @@ public class ReceiveServer extends Thread{
 
 	/**
 	 * bufferSize 설정 기본 10240
-	 * @param bufferSize
+	 * @param bufferSize int
 	 */
 	public void setBufferSize(int bufferSize) {
 		this.bufferSize = bufferSize;
