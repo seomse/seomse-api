@@ -39,13 +39,22 @@ public class ReceiveCommunication extends Thread{
 	private final StringReceive stringReceive;
 	
 	private ExceptionHandler exceptionHandler;
-	
-	
+
+	/**
+	 * 생성자
+	 * @param socket socket
+	 * @param bufSize int
+	 * @throws IOException IOException
+	 */
 	ReceiveCommunication(Socket socket, int bufSize) throws  IOException{
 		stringReceive = new StringReceive(socket, bufSize);
 	}
-	
 
+
+	/**
+	 * ExceptionHandler 설정
+	 * @param exceptionHandler ExceptionHandler 예외 핸들링
+	 */
 	public void setExceptionHandler(ExceptionHandler exceptionHandler) {
 		this.exceptionHandler = exceptionHandler;
 	}

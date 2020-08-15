@@ -49,7 +49,11 @@ public class ApiRequestServer extends Thread{
 	private final ApiRequestConnectHandler connectHandler;
 
 
-
+	/**
+	 * 생성자
+	 * @param port int
+	 * @param connectHandler ApiRequestConnectHandler
+	 */
 	public ApiRequestServer(int port, ApiRequestConnectHandler connectHandler){
 		this.port = port;
 		this.connectHandler = connectHandler;
@@ -57,8 +61,12 @@ public class ApiRequestServer extends Thread{
 	}
 	
 	private InetAddress inetAddress = null;
-	
-	
+
+	/**
+	 * InetAddress 설정
+	 * 네트워크 카디를 지정 하는 경우
+	 * @param inetAddress InetAddress
+	 */
 	public void setInetAddress(InetAddress inetAddress) {
 		this.inetAddress = inetAddress;
 	}

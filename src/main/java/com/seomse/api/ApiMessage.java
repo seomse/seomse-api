@@ -36,16 +36,16 @@ public abstract class ApiMessage {
 	}
 		
 	/**
-	 * 메시지 전달
-	 * @param message sendMessage
+	 * send message
+	 * @param message string sendMessage
 	 */
 	public void sendMessage(String message) {
 		communication.sendMessage(message);
 	}
 	
 	/**
-	 * 메시지 받기
-	 * @param message receiveMessage
+	 * receive message
+	 * @param message string receiveMessage
 	 */
 	public abstract void receive(String message);
 	

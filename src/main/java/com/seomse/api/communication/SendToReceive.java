@@ -51,10 +51,11 @@ public class SendToReceive {
 	private InputStreamReader reader;
 	private boolean readMessageFlag ;
 	private Integer connectTimeOut = null;
-	
+
 	/**
 	 * 생성자
-	 * @param socket 접속정보
+	 * @param socket sockre
+	 * @throws IOException IOException
 	 */
 	public SendToReceive(Socket socket) throws IOException{
 	
@@ -65,7 +66,13 @@ public class SendToReceive {
 		writer = new OutputStreamWriter(socket.getOutputStream(), CommunicationDefault.CHAR_SET);
 	
 	}
-	
+
+	/**
+	 * 생성자
+	 */
+	public SendToReceive(){
+		
+	}
 	
 	
 
@@ -90,7 +97,7 @@ public class SendToReceive {
 	
 	/**
 	 * 연결제한시간을 돌려준다.
-	 * @return 연결제한시간
+	 * @return Integer 연결제한시간 (allow null )
 	 */
 	public Integer getConnectTimeOut() {
 		return connectTimeOut;
@@ -106,16 +113,13 @@ public class SendToReceive {
 	}
 
 
+
 	/**
-	 * 생성자
-	 */
-	public SendToReceive() {
-		
-	}
-	
-	
-	/**
-	 * 연결이끊어졌을경우 제연결한다.
+	 * 연결
+	 * 끊어 졌을 경우 다시 연결 함
+	 * @param host string host address
+	 * @param port int port
+	 * @return boolean is connect
 	 */
 	public boolean connect(String host, int port){
 		if(socket == null || socket.isClosed()){
@@ -154,8 +158,8 @@ public class SendToReceive {
 		
 	}
 	/**
-	 * 연결중인지 체크한다.
-	 * @return 연결여부
+	 * connect check
+	 * @return boolean connect check flag
 	 */
 	public boolean isConnect(){
 		if(!readMessageFlag){
@@ -167,7 +171,7 @@ public class SendToReceive {
 	
 	/**
 	 * 메시지를 돌려받는다
-	 * @return 메시지
+	 * @return string response message
 	 */
 	public String receive(){
 		int readData ;
@@ -217,7 +221,7 @@ public class SendToReceive {
 	/**
 	 * 메시지전달
 	 * null 이나 빈값이 들어오면 전달하지 않는다.
-	 * @param message 메시지를 전달한
+	 * @param message string send message
 	 */
 	public boolean send(String message){
 		if(message == null || message.equals(""))
@@ -258,7 +262,7 @@ public class SendToReceive {
 	
 	/**
 	 * socket 얻기
-	 * @return socket
+	 * @return socket used socket
 	 */
 	public Socket getSocket() {
 		return socket;

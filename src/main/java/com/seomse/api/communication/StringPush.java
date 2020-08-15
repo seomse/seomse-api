@@ -39,9 +39,12 @@ public class StringPush {
 	private OutputStreamWriter send;
 
 	private ExceptionHandler exceptionHandler = null;
+
+
 	/**
 	 * 생성자
 	 * @param socket socket
+	 * @throws IOException IOException
 	 */
 	public StringPush(Socket socket) throws IOException{
 		this.socket = socket; 
@@ -53,8 +56,8 @@ public class StringPush {
 	
 	/**
 	 * 생성자
-	 * @param hostAddress hostAddress
-	 * @param port port
+	 * @param hostAddress string hostAddress
+	 * @param port int port
 	 */
 	public StringPush(String hostAddress, int port){
 		this.hostAddress = hostAddress;
@@ -72,7 +75,7 @@ public class StringPush {
 	/**
 	 * 서버와 연결한다.
 	 * 문자열 전송이 완료되면 반드시 disconnet() 메소드를 호출해야 한다.
-	 * @return 연결 성공실패 여부
+	 * @return  boolean is connect
 	 */
 	public boolean connect(){
 		if(socket == null || socket.isClosed()){
@@ -115,8 +118,8 @@ public class StringPush {
 	
 	/**
 	 * 서버에 문자열 형태의 메시지를 전송한다.
-	 * @param msg sendMessage
-	 * @return 메시지 전송 성공실패여부
+	 * @param msg string send message
+	 * @return  boolean send success flag
 	 */
 	public boolean sendMessage(String msg){	
 		try{

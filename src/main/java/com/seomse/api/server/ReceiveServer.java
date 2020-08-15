@@ -64,7 +64,7 @@ public class ReceiveServer extends Thread{
 	
 	/**
 	 * bufferSize 얻기
-	 * @return bufferSize
+	 * @return int bufferSize
 	 */
 	public int getBufferSize() {
 		return bufferSize;
@@ -139,8 +139,8 @@ public class ReceiveServer extends Thread{
 
 	
 	/**
-	 * 종료여부얻기
-	 * @return isEnd
+	 * 종료 여부 얻기
+	 * @return boolean isEnd
 	 */
 	public boolean isEnd() {
 		return isEnd;

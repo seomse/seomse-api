@@ -4,11 +4,13 @@
 -   open jdk 1.8
 
 # 구성
-1. api 
+api 
  - java class 구현에 따른 기능 제공 
-2. 역 제어 api
+
+역 제어 api(reverse control api)
  - 클라이언트가 서버가 되어 나를 제어할 수 있는 api 기능 제공
-3. push, receive
+
+push, receive
  - 대량 메시지 전송을 위한 방식, 데이터 전송 단위 크기를 정할 수 있고 메시지 종료 이벤트를 받을 수 있음.
  
 #문서자료
@@ -19,4 +21,4 @@ https://seomse.com/
 주소에 업데이트 될 예정 입니다.
 
 #gradle
-최종 분리 작업중에 있습니다.
+implementation 'com.seomse.api:seomse-api:1.0.0'

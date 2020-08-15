@@ -29,11 +29,12 @@ public class StringReceive {
 	private Socket socket ;
 	private InputStreamReader reader ;
 	private final char [] charBuffer;
-	
-	
-	
+
 	/**
 	 * 생성자
+	 * @param socket socket
+	 * @param bufSize int receive buffer size
+	 * @throws IOException IOException
 	 */
 	public StringReceive(Socket socket, int bufSize) throws IOException{
 		this.socket =socket;
@@ -41,8 +42,11 @@ public class StringReceive {
 		charBuffer = new char[bufSize];
 	}
 	
+
 	/**
-	 * 메시지얻기
+	 * 메시지 얻기
+	 * @return string receive message
+	 * @throws IOException IOException
 	 */
 	public String receive() throws IOException{
 	

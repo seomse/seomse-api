@@ -60,8 +60,8 @@ public class ApiServer extends Thread {
 	
 	/**
 	 * 생성자
-	 * @param port port
-	 * @param packageName default packageName
+	 * @param port int service port
+	 * @param packageName string default packageName
 	 */
 	public ApiServer(int port, String packageName){
 		this.port = port;
@@ -70,9 +70,13 @@ public class ApiServer extends Thread {
 	}
 	
 	private InetAddress inetAddress = null;
-	
-	
 
+
+	/**
+	 * inet address 설정 
+	 * 네트워크를 지정할 떄
+	 * @param inetAddress InetAddress
+	 */
 	public void setInetAddress(InetAddress inetAddress) {
 		this.inetAddress = inetAddress;
 	}
@@ -122,7 +126,7 @@ public class ApiServer extends Thread {
 	
 	/**
 	 * 연결개수 얻기
-	 * @return apiCommunicationList size
+	 * @return int apiCommunicationList size
 	 */
 	public int size() {
 		return apiCommunicationList.size();
@@ -140,9 +144,5 @@ public class ApiServer extends Thread {
 			serverSocket = null;
 			
 		}catch(Exception e){}
-	}
-
-	public static void main(String[] args) {
-		new ApiServer(Integer.parseInt(args[0]), args[1]).start();
 	}
 }

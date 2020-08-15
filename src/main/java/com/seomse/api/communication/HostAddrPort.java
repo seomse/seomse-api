@@ -24,10 +24,18 @@ public class HostAddrPort {
     private int port;
 
 
+    /**
+     * 생성자
+     */
     public HostAddrPort(){
 
     }
 
+    /**
+     * 생성자
+     * @param hostAddress string host address
+     * @param port int port
+     */
     public HostAddrPort(String hostAddress, int port){
         this.hostAddress = hostAddress;
         this.port = port;
@@ -40,6 +48,10 @@ public class HostAddrPort {
         return hostAddress;
     }
 
+    /**
+     * host address setting
+     * @param hostAddress string
+     */
     public void setHostAddress(String hostAddress) {
         this.hostAddress = hostAddress;
     }
@@ -51,6 +63,10 @@ public class HostAddrPort {
         return port;
     }
 
+    /**
+     * port setting
+     * @param port int
+     */
     public void setPort(int port) {
         this.port = port;
     }

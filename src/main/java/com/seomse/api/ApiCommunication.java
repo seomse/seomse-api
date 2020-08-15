@@ -32,41 +32,29 @@ import java.net.Socket;
  */
 public class ApiCommunication extends Thread{
 
-	
-	
 	private static final Logger logger = LoggerFactory.getLogger(ApiCommunication.class);
 	public static final char DEFAULT_PACKAGE = 'D';
 	public static final char CUSTOM_PACKAGE = 'C';
-	
-	
-	
-	
-	private SendToReceive sendToReceive;
+
+	private final SendToReceive sendToReceive;
 	private boolean flag = true;
 	
-	private String defaultPackageName;
+	private final String defaultPackageName;
 	
-	
-	private long createTime;
+	private final long createTime;
 	
 	private ObjCallback endCallback = null;
 	
 	private ExceptionHandler exceptionHandler = null;
 
-		
 	private int maxLogLength = 150;
-	
-	
-	private boolean isLog= true;
-	
-	public void setNotLog() {
-		isLog = false;
-	}
-	
+
+
 	/**
 	 * 생성자
-	 * @param defaultPackageName 기본패키지
-	 * @param socket 소캣
+	 * @param defaultPackageName string default package name
+	 * @param socket Socket
+	 * @throws IOException IOException
 	 */
 	public ApiCommunication(String defaultPackageName, Socket socket) throws  IOException {
 		sendToReceive = new SendToReceive(socket);
@@ -88,7 +76,7 @@ public class ApiCommunication extends Thread{
 
 	/**
 	 * 생성 time 얻기
-	 * @return CreateTime
+	 * @return long CreateTime
 	 */
 	public long getCreateTime() {
 		return createTime;
@@ -139,18 +127,20 @@ public class ApiCommunication extends Thread{
 		}
 		
 	}
-	
+
+	/**
+	 * message read
+	 * @param message string message
+	 */
 	private void readMessage(String message) {
-		
-		if(isLog) {
-			if(message.length() > maxLogLength){
-				logger.debug("readMessage: " + message.substring(0 , maxLogLength) + ".. +" + message.length() + "characters.");
-			} else {
-				logger.debug("readMessage: " + message);
-			}
+
+		if(message.length() > maxLogLength){
+			logger.debug("readMessage: " + message.substring(0 , maxLogLength) + ".. +" + message.length() + "characters.");
+		} else {
+			logger.debug("readMessage: " + message);
 		}
-	
-		
+
+
 		char packageType = message.charAt(0);
 		message = message.substring(1);
 		
@@ -178,7 +168,6 @@ public class ApiCommunication extends Thread{
 			
 		try {
 			Class<?> apiMessageClass = Class.forName(className);
-			//noinspection deprecation
 			ApiMessage apiMessage = (ApiMessage)apiMessageClass.newInstance();
 			apiMessage.setCommunication(this);
 			apiMessage.receive(message);
@@ -187,15 +176,14 @@ public class ApiCommunication extends Thread{
 			ExceptionUtil.exception(e1, logger, exceptionHandler);
 
 		}
-			
-			
-				
+
 	}
 	
 	/**
-	 * 메시지전달
+	 * send message
 	 * null 이나 빈값이 들어오면 전달하지 않는다.
 	 * @param message sendMessage
+	 * @return boolean message send success fail
 	 */
 	public boolean sendMessage(String message){
 		if(message == null){
@@ -206,9 +194,8 @@ public class ApiCommunication extends Thread{
 			logger.error("message send Fail(Not Connected) : " + message);
 			return false;
 		}
-		if(isLog) {
-			logger.debug(getSendMessageLog(message, maxLogLength));
-		}
+
+		logger.debug(getSendMessageLog(message, maxLogLength));
 		return sendToReceive.send(message);
 	}
 
@@ -229,8 +216,6 @@ public class ApiCommunication extends Thread{
 		return log;
 	}
 
-	
-	
 	/**
 	 * 연결종료
 	 */

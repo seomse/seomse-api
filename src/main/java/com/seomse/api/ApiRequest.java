@@ -47,14 +47,7 @@ public class ApiRequest {
 	private String packageName = null;  
 	
 	private int maxLogLength = 150;
-	
 
-	private boolean isLog= true;
-	
-	public void setNotLog() {
-		isLog = false;
-	}
-	
 	/**
 	 * 생성자 
 	 * @param host 서버 아이피 주소, 또는 도메인 주소
@@ -64,7 +57,7 @@ public class ApiRequest {
 		this.host = host;
 		this.port = port;
 		
-		sendToReceive = new SendToReceive();	
+		sendToReceive = new SendToReceive();
 
 	}
 	
@@ -149,7 +142,7 @@ public class ApiRequest {
 	 * 전달받아야할 메시지가 있을때사용
 	 * @param code code
 	 * @param sendMessage sendMessage
-	 * @return ReceiveMessage
+	 * @return string ReceiveMessage
 	 */
 	public String sendToReceiveMessage(String code, String sendMessage){
 		isWaitingTimeOver = false;
@@ -163,10 +156,8 @@ public class ApiRequest {
 			sendMessage = "";
 		}
 
-		if(isLog) {
-			logger.debug(ApiCommunication.getSendMessageLog(sendMessage, maxLogLength));
-		}
-		
+		logger.debug(ApiCommunication.getSendMessageLog(sendMessage, maxLogLength));
+
 		if(packageName == null){
 			sendToReceive.send(ApiCommunication.DEFAULT_PACKAGE +code +"," + sendMessage);
 		}else{
@@ -193,7 +184,7 @@ public class ApiRequest {
 		
 		String receiveMessage = sendToReceive.receive() ;
 		
-		if(receiveMessage != null && isLog){
+		if(receiveMessage != null){
 			if(receiveMessage.length() > 100){
 				logger.debug("receiveMessage: " + receiveMessage.substring(0 , 100) + ".. +" + receiveMessage.length() + "characters.");
 			} else {
