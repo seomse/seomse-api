@@ -17,6 +17,8 @@ push, receive
 # gradle
 implementation 'com.seomse.api:seomse-api:1.0.0'
 
+# etc
+https://mvnrepository.com/artifact/com.seomse.api/seomse-api/1.0.0
 
 # communication
 blog, homepage
