@@ -13,12 +13,21 @@ api
 push, receive
  - 대량 메시지 전송을 위한 방식, 데이터 전송 단위 크기를 정할 수 있고 메시지 종료 이벤트를 받을 수 있음.
  
-#문서자료
-구성 부분에 있는 기능들의 상세한 사용 방법은 지원 하려 합니다.
- - 아직 문서화는 진행 되지 않았습니다.
 
-https://seomse.com/ 
-주소에 업데이트 될 예정 입니다.
-
-#gradle
+# gradle
 implementation 'com.seomse.api:seomse-api:1.0.0'
+
+
+# communication
+blog, homepage
+- www.seomse.com
+- seomse.com
+
+카카오톡 오픈톡
+ - https://open.kakao.com/o/g6vzOKqb
+
+슬랙 slack
+ - https://seomse.slack.com/
+
+email (협업, 외주)
+ - comseomse@gmail.com
