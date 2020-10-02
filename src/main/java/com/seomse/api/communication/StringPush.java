@@ -43,7 +43,7 @@ public class StringPush {
 
 	/**
 	 * 생성자
-	 * @param socket socket
+	 * @param socket Socket
 	 * @throws IOException IOException
 	 */
 	public StringPush(Socket socket) throws IOException{
@@ -56,7 +56,7 @@ public class StringPush {
 	
 	/**
 	 * 생성자
-	 * @param hostAddress string hostAddress
+	 * @param hostAddress String hostAddress
 	 * @param port int port
 	 */
 	public StringPush(String hostAddress, int port){
@@ -66,7 +66,7 @@ public class StringPush {
 
 	/**
 	 * 예외 핸들러 설정
-	 * @param exceptionHandler exceptionHandler
+	 * @param exceptionHandler ExceptionHandler
 	 */
 	public void setExceptionHandler(ExceptionHandler exceptionHandler) {
 		this.exceptionHandler = exceptionHandler;
@@ -75,7 +75,7 @@ public class StringPush {
 	/**
 	 * 서버와 연결한다.
 	 * 문자열 전송이 완료되면 반드시 disconnet() 메소드를 호출해야 한다.
-	 * @return  boolean is connect
+	 * @return boolean is connect
 	 */
 	public boolean connect(){
 		if(socket == null || socket.isClosed()){
@@ -118,8 +118,8 @@ public class StringPush {
 	
 	/**
 	 * 서버에 문자열 형태의 메시지를 전송한다.
-	 * @param msg string send message
-	 * @return  boolean send success flag
+	 * @param msg String send message
+	 * @return boolean send success flag
 	 */
 	public boolean sendMessage(String msg){	
 		try{

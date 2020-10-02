@@ -42,7 +42,7 @@ public class ReceiveCommunication extends Thread{
 
 	/**
 	 * 생성자
-	 * @param socket socket
+	 * @param socket Socket
 	 * @param bufSize int
 	 * @throws IOException IOException
 	 */

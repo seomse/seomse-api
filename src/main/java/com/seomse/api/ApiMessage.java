@@ -37,7 +37,7 @@ public abstract class ApiMessage {
 		
 	/**
 	 * send message
-	 * @param message string sendMessage
+	 * @param message String sendMessage
 	 */
 	public void sendMessage(String message) {
 		communication.sendMessage(message);
@@ -45,7 +45,7 @@ public abstract class ApiMessage {
 	
 	/**
 	 * receive message
-	 * @param message string receiveMessage
+	 * @param message String receiveMessage
 	 */
 	public abstract void receive(String message);
 	

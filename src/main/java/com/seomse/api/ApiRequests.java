@@ -24,12 +24,12 @@ public class ApiRequests {
 
     /**
      * 1회성 메시지 클래스
-     * @param hostAddress string address
+     * @param hostAddress String address
      * @param port int port
-     * @param packageName string package name
-     * @param code string code = run class name
-     * @param message string request message
-     * @return string response message
+     * @param packageName String package name
+     * @param code String code = run class name
+     * @param message String request message
+     * @return String response message
      */
     public static String sendToReceiveMessage(String hostAddress, int port, String packageName, String code, String message){
 

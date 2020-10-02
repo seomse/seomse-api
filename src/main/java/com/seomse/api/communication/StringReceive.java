@@ -32,7 +32,7 @@ public class StringReceive {
 
 	/**
 	 * 생성자
-	 * @param socket socket
+	 * @param socket Socket
 	 * @param bufSize int receive buffer size
 	 * @throws IOException IOException
 	 */
@@ -45,7 +45,7 @@ public class StringReceive {
 
 	/**
 	 * 메시지 얻기
-	 * @return string receive message
+	 * @return Socket receive message
 	 * @throws IOException IOException
 	 */
 	public String receive() throws IOException{

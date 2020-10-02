@@ -14,10 +14,10 @@
 - 대량 메시지 전송을 위한 방식, 데이터 전송 단위 크기를 정할 수 있고 메시지 종료 이벤트를 받을 수 있음.
  
 # gradle
-implementation 'com.seomse.api:seomse-api:1.0.0'
+implementation 'com.seomse.api:seomse-api:1.0.1'
 
 # etc
-https://mvnrepository.com/artifact/com.seomse.api/seomse-api/1.0.0
+https://mvnrepository.com/artifact/com.seomse.api/seomse-api/1.0.1
 
 # communication
 ### blog, homepage

@@ -57,7 +57,7 @@ public class HostAddrPort {
     }
 
     /**
-     * @return port number
+     * @return int port number
      */
     public int getPort() {
         return port;

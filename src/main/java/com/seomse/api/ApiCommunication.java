@@ -66,7 +66,7 @@ public class ApiCommunication extends Thread{
 	
 	/**
 	 * 로그 최대문자 길이 설정
-	 * @param maxLogLength maxLogLength
+	 * @param maxLogLength int
 	 */
 	public void setMaxLogLength(int maxLogLength) {
 		this.maxLogLength = maxLogLength;
@@ -76,7 +76,7 @@ public class ApiCommunication extends Thread{
 
 	/**
 	 * 생성 time 얻기
-	 * @return long CreateTime
+	 * @return long time
 	 */
 	public long getCreateTime() {
 		return createTime;
@@ -130,7 +130,7 @@ public class ApiCommunication extends Thread{
 
 	/**
 	 * message read
-	 * @param message string message
+	 * @param message String message
 	 */
 	private void readMessage(String message) {
 
@@ -182,7 +182,7 @@ public class ApiCommunication extends Thread{
 	/**
 	 * send message
 	 * null 이나 빈값이 들어오면 전달하지 않는다.
-	 * @param message sendMessage
+	 * @param message String sendMessage
 	 * @return boolean message send success fail
 	 */
 	public boolean sendMessage(String message){
@@ -201,9 +201,9 @@ public class ApiCommunication extends Thread{
 
 	/**
 	 * send message log 얻기
-	 * @param message sendMessage
-	 * @param maxLogLength maxLogLength
-	 * @return SendMessageLog
+	 * @param message String sendMessage
+	 * @param maxLogLength int maxLogLength
+	 * @return String SendMessageLog
 	 */
 	public static String getSendMessageLog(String message, int maxLogLength){
 		String log ;

@@ -47,8 +47,10 @@ public class ReceiveServer extends Thread{
 	
 	private ExceptionHandler exceptionHandler;
 	
+
 	/**
 	 * 생성자
+	 * @param port int
 	 */
 	public ReceiveServer(int port){
 		this.port = port;
@@ -81,7 +83,7 @@ public class ReceiveServer extends Thread{
 
 	/**
 	 * inetAddress 설정
-	 * @param inetAddress inetAddress
+	 * @param inetAddress InetAddress
 	 */
 	public void setInetAddress(InetAddress inetAddress) {
 		this.inetAddress = inetAddress;

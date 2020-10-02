@@ -50,8 +50,8 @@ public class ApiRequest {
 
 	/**
 	 * 생성자 
-	 * @param host 서버 아이피 주소, 또는 도메인 주소
-	 * @param port 서버포트
+	 * @param host String 서버 아이피 주소, 또는 도메인 주소
+	 * @param port int 서버포트
 	 */
 	public ApiRequest(String host, int  port) {
 		this.host = host;
@@ -63,7 +63,7 @@ public class ApiRequest {
 	
 	/**
 	 * 생성자
-	 * @param socket socket
+	 * @param socket Socket
 	 */
 	public ApiRequest(Socket socket) throws  IOException{
 		sendToReceive = new SendToReceive(socket);
@@ -75,7 +75,7 @@ public class ApiRequest {
 	 * 연결 오류 여부 설정
 	 * false 이면 연결오류를 표시하지 않음
 	 * ping 테스트에 에러를 표시하고 싶지 않을 경우 사용
-	 * @param isConnectErrorLog isConnectErrorLog
+	 * @param isConnectErrorLog boolean isConnectErrorLog
 	 */
 	public void setConnectErrorLog(boolean isConnectErrorLog) {
 		sendToReceive.setConnectErrorLog(isConnectErrorLog);
@@ -83,8 +83,8 @@ public class ApiRequest {
 	
 	/**
 	 * 연결정보 다시설정
-	 * @param host host
-	 * @param port 포트번호
+	 * @param host String
+	 * @param port int 포트번호
 	 */
 	public void setConnect(String host, int port){
 		if(!this.host.equals(host) || this.port != port ){
@@ -96,7 +96,7 @@ public class ApiRequest {
 	
 	/**
 	 * 로그 최대문자 길이 설정
-	 * @param maxLogLength MaxLogLength
+	 * @param maxLogLength String MaxLogLength
 	 */
 	public void setMaxLogLength(int maxLogLength) {
 		this.maxLogLength = maxLogLength;
@@ -104,7 +104,7 @@ public class ApiRequest {
 	
 	/**
 	 * 패키지명 설정
-	 * @param packageName PackageName
+	 * @param packageName String
 	 */
 	public void setPackageName(String packageName) {
 		this.packageName = packageName;
@@ -112,7 +112,7 @@ public class ApiRequest {
 
 	/**
 	 * 접속 대기시간 설정
-	 * @param connectTimeOut connectTimeOut
+	 * @param connectTimeOut Integer
 	 */
 	public void setConnectTimeOut(Integer connectTimeOut) {
 		this.connectTimeOut = connectTimeOut;
@@ -120,7 +120,7 @@ public class ApiRequest {
 
 	/**
 	 * 대기시간을 설정한다.
-	 * @param time WaitingTime
+	 * @param time Long
 	 */
 	public void setWaitingTime(Long time){
 		waitingTime = time;
@@ -140,9 +140,9 @@ public class ApiRequest {
 	/**
 	 * 메시지를 요청하고 전달받은 메시지를 돌려준다
 	 * 전달받아야할 메시지가 있을때사용
-	 * @param code code
-	 * @param sendMessage sendMessage
-	 * @return string ReceiveMessage
+	 * @param code String code
+	 * @param sendMessage String sendMessage
+	 * @return String ReceiveMessage
 	 */
 	public String sendToReceiveMessage(String code, String sendMessage){
 		isWaitingTimeOver = false;

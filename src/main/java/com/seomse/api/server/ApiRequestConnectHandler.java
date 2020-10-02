@@ -30,7 +30,7 @@ import com.seomse.api.ApiRequest;
 public interface ApiRequestConnectHandler {
 	/**
 	 * 연결
-	 * @param apiRequest apiRequest
+	 * @param apiRequest ApiRequest
 	 */
 	void connect(ApiRequest apiRequest);
 }

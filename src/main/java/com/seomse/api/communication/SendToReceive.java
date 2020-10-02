@@ -78,7 +78,7 @@ public class SendToReceive {
 
 	/**
 	 * 예외 핸들링설정
-	 * @param exceptionHandler 예외 핸들러
+	 * @param exceptionHandler ExceptionHandler 예외 핸들러
 	 */
 	public void setExceptionHandler(ExceptionHandler exceptionHandler) {
 		this.exceptionHandler = exceptionHandler;
@@ -88,7 +88,7 @@ public class SendToReceive {
 
 	/**
 	 * 연결에러로그 설정
-	 * @param isConnectErrorLog 에러로그 츌력 여부
+	 * @param isConnectErrorLog boolean 에러로그 츌력 여부
 	 */
 	public void setConnectErrorLog(boolean isConnectErrorLog){
 		this.isConnectErrorLog = isConnectErrorLog;
@@ -106,7 +106,7 @@ public class SendToReceive {
 
 	/**
 	 * 연결 제한시간을 설정한다.
-	 * @param connectTimeOut 연결제한시간
+	 * @param connectTimeOut Integer 연결제한시간
 	 */
 	public void setConnectTimeOut(Integer connectTimeOut) {
 		this.connectTimeOut = connectTimeOut;
@@ -117,7 +117,7 @@ public class SendToReceive {
 	/**
 	 * 연결
 	 * 끊어 졌을 경우 다시 연결 함
-	 * @param host string host address
+	 * @param host String host address
 	 * @param port int port
 	 * @return boolean is connect
 	 */
@@ -171,7 +171,7 @@ public class SendToReceive {
 	
 	/**
 	 * 메시지를 돌려받는다
-	 * @return string response message
+	 * @return String receive message
 	 */
 	public String receive(){
 		int readData ;
@@ -221,7 +221,7 @@ public class SendToReceive {
 	/**
 	 * 메시지전달
 	 * null 이나 빈값이 들어오면 전달하지 않는다.
-	 * @param message string send message
+	 * @param message String send message
 	 */
 	public boolean send(String message){
 		if(message == null || message.equals(""))
@@ -262,7 +262,7 @@ public class SendToReceive {
 	
 	/**
 	 * socket 얻기
-	 * @return socket used socket
+	 * @return Socket used socket
 	 */
 	public Socket getSocket() {
 		return socket;
