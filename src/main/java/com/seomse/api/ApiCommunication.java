@@ -217,13 +217,19 @@ public class ApiCommunication extends Thread{
 	}
 
 	/**
+	 * connect check
+	 * @return boolean connect check flag
+	 */
+	public boolean isConnect(){
+		return sendToReceive.isConnect();
+	}
+
+	/**
 	 * 연결종료
 	 */
 	public void disConnect() {
 		flag = false;
 		sendToReceive.disConnect();
-		
-		
 	}
 
 }
