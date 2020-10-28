@@ -17,6 +17,7 @@
 package com.seomse.api;
 
 import com.seomse.api.communication.SendToReceive;
+import com.seomse.commons.config.Config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,7 +43,7 @@ public class ApiRequest {
 	
 	private Long waitingTime =null;
 	
-	private Integer connectTimeOut = null;
+	private int connectTimeOut = Config.getInteger("api.connect.time.out", 30000);
 	
 	private String packageName = null;  
 	
@@ -114,7 +115,7 @@ public class ApiRequest {
 	 * 접속 대기시간 설정
 	 * @param connectTimeOut Integer
 	 */
-	public void setConnectTimeOut(Integer connectTimeOut) {
+	public void setConnectTimeOut(int connectTimeOut) {
 		this.connectTimeOut = connectTimeOut;
 	}
 

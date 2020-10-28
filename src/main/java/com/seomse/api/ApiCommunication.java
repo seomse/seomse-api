@@ -232,4 +232,12 @@ public class ApiCommunication extends Thread{
 		sendToReceive.disConnect();
 	}
 
+	/**
+	 * 마지막 연결 시간 얻기
+	 * @return long (time)
+	 */
+	public long getLastConnectTime() {
+		return sendToReceive.getLastConnectTime();
+	}
+
 }

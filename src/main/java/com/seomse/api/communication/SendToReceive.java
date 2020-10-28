@@ -15,6 +15,7 @@
  */
 package com.seomse.api.communication;
 
+import com.seomse.commons.config.Config;
 import com.seomse.commons.handler.ExceptionHandler;
 import com.seomse.commons.utils.ExceptionUtil;
 import org.slf4j.Logger;
@@ -38,9 +39,7 @@ public class SendToReceive {
 	
 	private static final char START =(char)0;
 	private static final char END =(char)1;
-	
-	
-	
+
 	private boolean isConnectErrorLog = true;
 	
 	private ExceptionHandler exceptionHandler;
@@ -50,15 +49,18 @@ public class SendToReceive {
 	private OutputStreamWriter writer;
 	private InputStreamReader reader;
 	private boolean readMessageFlag ;
-	private Integer connectTimeOut = null;
+	//기본값 30초
+	private int connectTimeOut = Config.getInteger("api.connect.time.out", 30000);
+
+	private long lastConnectTime = System.currentTimeMillis();
 
 	/**
 	 * 생성자
-	 * @param socket sockre
+	 * @param socket Socket
 	 * @throws IOException IOException
 	 */
 	public SendToReceive(Socket socket) throws IOException{
-	
+
 		readMessageFlag = true;
 		this.socket = socket;
 			
@@ -71,7 +73,7 @@ public class SendToReceive {
 	 * 생성자
 	 */
 	public SendToReceive(){
-		
+
 	}
 	
 	
@@ -108,7 +110,7 @@ public class SendToReceive {
 	 * 연결 제한시간을 설정한다.
 	 * @param connectTimeOut Integer 연결제한시간
 	 */
-	public void setConnectTimeOut(Integer connectTimeOut) {
+	public void setConnectTimeOut(int connectTimeOut) {
 		this.connectTimeOut = connectTimeOut;
 	}
 
@@ -128,17 +130,14 @@ public class SendToReceive {
 			readMessageFlag = true;
 			try{
 				
-				if(connectTimeOut == null){
-					socket = new Socket(host, port);
-				}else{
-					SocketAddress socketAddress = new InetSocketAddress(host, port);
-					socket = new Socket();
-					socket.setSoTimeout(connectTimeOut);
-					socket.connect(socketAddress, connectTimeOut);
-				}
+				SocketAddress socketAddress = new InetSocketAddress(host, port);
+				socket = new Socket();
+				socket.setSoTimeout(connectTimeOut);
+				socket.connect(socketAddress, connectTimeOut);
 				reader  = new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8);
 				writer = new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8);
-				
+
+				lastConnectTime = System.currentTimeMillis();
 
 				return true;
 			}catch(Exception e){
@@ -151,11 +150,9 @@ public class SendToReceive {
 			}
 			
 		}
-		
-		
+
 		readMessageFlag = true;
 		return true;
-		
 	}
 	/**
 	 * connect check
@@ -199,6 +196,7 @@ public class SendToReceive {
 						messageBuilder.setLength(0);
 						break;
 					case END:
+						lastConnectTime = System.currentTimeMillis();
 						return messageBuilder.toString();
 						
 					default:
@@ -234,12 +232,12 @@ public class SendToReceive {
 		try {
 			writer.write(START+message+END);
 			writer.flush();
+			lastConnectTime = System.currentTimeMillis();
 		} catch (IOException e) {
 			return false;
 		}
 		
 		return true;
-	
 	}
 	
 	/**
@@ -267,6 +265,14 @@ public class SendToReceive {
 	public Socket getSocket() {
 		return socket;
 	}
-	
+
+
+	/**
+	 * 마지막 연결 시간 얻기
+	 * @return long (time)
+	 */
+	public long getLastConnectTime() {
+		return lastConnectTime;
+	}
 }
 	
