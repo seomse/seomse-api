@@ -21,10 +21,8 @@ https://mvnrepository.com/artifact/com.seomse.api/seomse-api/1.0.5
 
 # communication
 ### blog, homepage
-- [www.seomse.com](https://www.seomse.com/)
-- [github.com/seomse](https://github.com/seomse)
-- [seomse.tistory.com](https://seomse.tistory.com/)
-- [seomse.github.io](https://seomse.github.io/)
+- seomse.tistory.com
+- www.seomse.com
 - seomse.com
 
 ### 카카오톡 오픈톡
@@ -33,10 +31,5 @@ https://mvnrepository.com/artifact/com.seomse.api/seomse-api/1.0.5
 ### 슬랙 slack
 - https://seomse.slack.com/
 
-### email
- - comseomse@gmail.com
- 
- 
-# main developer
- - macle
-    -  [github.com/macle86](https://github.com/macle86)
+### email (협업, 외주)
+ - comseomse@gmail.comy
