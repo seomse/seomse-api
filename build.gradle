@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'com.seomse.api'
-version '1.0.5-SNAPSHOT'
+version '1.0.6'
 
 
 repositories {
@@ -17,5 +17,5 @@ dependencies {
     implementation 'ch.qos.logback:logback-classic:1.2.3'
     implementation 'ch.qos.logback:logback-access:1.2.3'
 
-    implementation 'com.seomse.commons:seomse-commons:1.1.9'
+    implementation 'com.seomse.commons:seomse-commons:1.2.2'
 }
