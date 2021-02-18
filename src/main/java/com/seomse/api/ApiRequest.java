@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.net.Socket;
 /**
  * api 요청 클라이언트
- *
+ *  synchronized 와 되어있지 않음 동시 호출을 하지 않아야 함
  * @author macle
  */
 public class ApiRequest {
@@ -119,12 +119,18 @@ public class ApiRequest {
 		this.connectTimeOut = connectTimeOut;
 	}
 
+	private Object waitingLock = null;
+
 	/**
 	 * 대기시간을 설정한다.
 	 * @param time Long
 	 */
 	public void setWaitingTime(Long time){
 		waitingTime = time;
+		if(waitingTime != null && waitingLock == null){
+			waitingLock = new Object();
+		}
+
 	}
 	
 	/**
@@ -138,6 +144,8 @@ public class ApiRequest {
 	
 	private boolean isSendMessage = false;
 	private boolean isWaitingTimeOver =false;
+	private boolean isWaitingRun = false;
+
 	/**
 	 * 메시지를 요청하고 전달받은 메시지를 돌려준다
 	 * 전달받아야할 메시지가 있을때사용
@@ -148,7 +156,7 @@ public class ApiRequest {
 	public String sendToReceiveMessage(String code, String sendMessage){
 		isWaitingTimeOver = false;
 		isSendMessage= false;
-		
+		isWaitingRun = false;
 		if(!sendToReceive.isConnect()){
 			return CONNECT_FAIL;
 		}
@@ -170,19 +178,32 @@ public class ApiRequest {
 
 		Thread waitingThread = null;
 
+
+		boolean isWait = false;
+
 		if(waitingTime != null){
+
+			isWaitingRun = true;
+
 			waitingThread = new Thread(() -> {
 				try{
 					Thread.sleep(waitingTime);
 				}catch(InterruptedException e){
 					return;
 				}
-				if(!isSendMessage){
-					isWaitingTimeOver = true;
-					logger.error("waitingTimeOut disconnect");
-					disConnect();
-				}
 
+				//noinspection SynchronizeOnNonFinalField
+				synchronized (waitingLock) {
+
+					if (!isSendMessage) {
+						isWaitingTimeOver = true;
+						logger.error("waitingTimeOut disconnect");
+						disConnect();
+					}
+
+
+					isWaitingRun = false;
+				}
 			});
 
 			waitingThread.start();
@@ -200,20 +221,37 @@ public class ApiRequest {
 			}
 				
 		}
-
-		isSendMessage = true;
-
-		if(isWaitingTimeOver){
-			receiveMessage = TIME_OVER;
-		}
+			
 		
+		if(waitingTime == null) {
+			isSendMessage = true;
+
+			if (isWaitingTimeOver) {
+				receiveMessage = TIME_OVER;
+			}
+		}else{
+			//wait 이벤트가 동작할경우 동기화 구간에서 실행
+			
+			//noinspection SynchronizeOnNonFinalField
+			synchronized (waitingLock) {
+				isSendMessage = true;
+
+				if (isWaitingTimeOver) {
+					receiveMessage = TIME_OVER;
+				}
+			}
+		}
 		if(receiveMessage == null)
 			receiveMessage = CONNECT_FAIL;
 
 		try{
-			if(waitingTime != null && waitingThread != null){
-				//wait time thread 종료
-				waitingThread.interrupt();
+
+			//noinspection SynchronizeOnNonFinalField
+			synchronized (waitingLock) {
+				if (waitingTime != null && waitingThread != null && isWaitingRun) {
+					//wait time thread 종료
+					waitingThread.interrupt();
+				}
 			}
 		}catch(Exception ignore){}
 
