@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'com.seomse.api'
-version '1.0.6'
+version '1.0.7'
 
 
 repositories {
@@ -11,5 +11,5 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.seomse.commons:seomse-commons:1.2.2'
+    implementation 'com.seomse.commons:seomse-commons:1.2.5'
 }

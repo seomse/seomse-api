@@ -166,11 +166,15 @@ public class ApiRequest {
 					
 		}
 
+
+
+		Thread waitingThread = null;
+
 		if(waitingTime != null){
-			new Thread(() -> {
+			waitingThread = new Thread(() -> {
 				try{
 					Thread.sleep(waitingTime);
-				}catch(Exception e){
+				}catch(InterruptedException e){
 					return;
 				}
 				if(!isSendMessage){
@@ -178,7 +182,10 @@ public class ApiRequest {
 					logger.error("waitingTimeOut disconnect");
 					disConnect();
 				}
-			}).start();
+
+			});
+
+			waitingThread.start();
 		}
 		
 		
@@ -193,13 +200,23 @@ public class ApiRequest {
 			}
 				
 		}
+
 		isSendMessage = true;
+
 		if(isWaitingTimeOver){
 			receiveMessage = TIME_OVER;
 		}
 		
 		if(receiveMessage == null)
 			receiveMessage = CONNECT_FAIL;
+
+		try{
+			if(waitingTime != null && waitingThread != null){
+				//wait time thread 종료
+				waitingThread.interrupt();
+			}
+		}catch(Exception ignore){}
+
 		return receiveMessage;
 	}
 	
