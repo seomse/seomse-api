@@ -13,10 +13,13 @@
 ### push, receive
 - 대량 메시지 전송을 위한 방식, 데이터 전송 단위 크기를 정할 수 있고 메시지 종료 이벤트를 받을 수 있음.
  
+### example
+test -> com.seomse.api.example 패키지에 다양한 예제들이 추가되고 있음
+
 # gradle
-implementation 'com.seomse.api:seomse-api:1.0.7'
+implementation 'com.seomse.api:seomse-api:1.0.8'
 - etc 
-    - https://mvnrepository.com/artifact/com.seomse.api/seomse-api/1.0.7
+    - https://mvnrepository.com/artifact/com.seomse.api/seomse-api/1.0.8
 
 # communication
 ### blog, homepage

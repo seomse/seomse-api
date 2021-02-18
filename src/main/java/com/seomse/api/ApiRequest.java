@@ -41,7 +41,7 @@ public class ApiRequest {
 	private String host;
 	private int port;
 	
-	private Long waitingTime =null;
+	private Long waitTimeOut =null;
 	
 	private int connectTimeOut = Config.getInteger("api.connect.time.out", 30000);
 	
@@ -119,16 +119,16 @@ public class ApiRequest {
 		this.connectTimeOut = connectTimeOut;
 	}
 
-	private Object waitingLock = null;
+	private Object waitLock = null;
 
 	/**
 	 * 대기시간을 설정한다.
 	 * @param time Long
 	 */
-	public void setWaitingTime(Long time){
-		waitingTime = time;
-		if(waitingTime != null && waitingLock == null){
-			waitingLock = new Object();
+	public void setWaitTimeOut(Long time){
+		waitTimeOut = time;
+		if(waitTimeOut != null && waitLock == null){
+			waitLock = new Object();
 		}
 
 	}
@@ -143,8 +143,8 @@ public class ApiRequest {
 	}
 	
 	private boolean isSendMessage = false;
-	private boolean isWaitingTimeOver =false;
-	private boolean isWaitingRun = false;
+	private boolean isWaitTimeOver =false;
+	private boolean isWaitRun = false;
 
 	/**
 	 * 메시지를 요청하고 전달받은 메시지를 돌려준다
@@ -154,9 +154,9 @@ public class ApiRequest {
 	 * @return String ReceiveMessage
 	 */
 	public String sendToReceiveMessage(String code, String sendMessage){
-		isWaitingTimeOver = false;
+		isWaitTimeOver = false;
 		isSendMessage= false;
-		isWaitingRun = false;
+		isWaitRun = false;
 		if(!sendToReceive.isConnect()){
 			return CONNECT_FAIL;
 		}
@@ -176,37 +176,37 @@ public class ApiRequest {
 
 
 
-		Thread waitingThread = null;
+		Thread waitThread = null;
 
 
 		boolean isWait = false;
 
-		if(waitingTime != null){
+		if(waitTimeOut != null){
 
-			isWaitingRun = true;
+			isWaitRun = true;
 
-			waitingThread = new Thread(() -> {
+			waitThread = new Thread(() -> {
 				try{
-					Thread.sleep(waitingTime);
+					Thread.sleep(waitTimeOut);
 				}catch(InterruptedException e){
 					return;
 				}
 
 				//noinspection SynchronizeOnNonFinalField
-				synchronized (waitingLock) {
+				synchronized (waitLock) {
 
 					if (!isSendMessage) {
-						isWaitingTimeOver = true;
+						isWaitTimeOver = true;
 						logger.error("waitingTimeOut disconnect");
 						disConnect();
 					}
 
 
-					isWaitingRun = false;
+					isWaitRun = false;
 				}
 			});
 
-			waitingThread.start();
+			waitThread.start();
 		}
 		
 		
@@ -223,20 +223,20 @@ public class ApiRequest {
 		}
 			
 		
-		if(waitingTime == null) {
+		if(waitTimeOut == null) {
 			isSendMessage = true;
 
-			if (isWaitingTimeOver) {
+			if (isWaitTimeOver) {
 				receiveMessage = TIME_OVER;
 			}
 		}else{
 			//wait 이벤트가 동작할경우 동기화 구간에서 실행
 			
 			//noinspection SynchronizeOnNonFinalField
-			synchronized (waitingLock) {
+			synchronized (waitLock) {
 				isSendMessage = true;
 
-				if (isWaitingTimeOver) {
+				if (isWaitTimeOver) {
 					receiveMessage = TIME_OVER;
 				}
 			}
@@ -247,10 +247,10 @@ public class ApiRequest {
 		try{
 
 			//noinspection SynchronizeOnNonFinalField
-			synchronized (waitingLock) {
-				if (waitingTime != null && waitingThread != null && isWaitingRun) {
+			synchronized (waitLock) {
+				if (waitTimeOut != null && waitThread != null && isWaitRun) {
 					//wait time thread 종료
-					waitingThread.interrupt();
+					waitThread.interrupt();
 				}
 			}
 		}catch(Exception ignore){}
